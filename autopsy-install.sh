@@ -17,19 +17,22 @@ then
     echo -e " -\tJAVA_HOME Variable Created - No need to manually set Java location"
     echo -e " -\tCompiles/'Installs' Sleuthkit - Prerequesite for Autopsy to run"
     echo -e "--------------------"
-
-
-    # https://github.com/sleuthkit/sleuthkit/releases/download/sleuthkit-4.10.1/sleuthkit-4.10.1.tar.gz
 	exit 1
 fi
 
-
+# Launch Autopsy if the installation process 
 if [[ $1 = "-start" ]]
 then
-    echo -e "---------------------------------------------------------\nautopsy-installer.sh - DuffyAPP_IT - @J_Duffy01\n---------------------------------------------------------"
-    echo "Launching!"
-    cd autopsy-4.17.0
-    bin/autopsy --jdkhome /usr/local/opt/openjdk
+    if [ -d sleuthkit-4.10.1/autopsy-4.17.0/bin ]
+    then
+        echo -e "---------------------------------------------------------\nautopsy-installer.sh - DuffyAPP_IT - @J_Duffy01\n---------------------------------------------------------"
+        echo "Launching!"
+        cd sleuthkit-4.10.1/autopsy-4.17.0
+        bin/autopsy --jdkhome /usr/local/opt/openjdk
+    else
+        echo -e "---------------------------------------------------------\nautopsy-installer.sh - DuffyAPP_IT - @J_Duffy01\n---------------------------------------------------------"
+        echo "Autopsy Does Not Exist In The Current Location - Execute With '-agree' To Install Autopsy"
+    fi
 fi
 
 if [[ $1 = "-agree" ]]
