@@ -39,24 +39,19 @@ if [[ $1 = "-agree" ]]
 	then
     echo -e "---------------------------------------------------------\nautopsy-installer.sh - DuffyAPP_IT - @J_Duffy01\n---------------------------------------------------------"
     echo "Waiting For 5 Seconds (If You Do Not Wish To Install, Hit Control+C Now!)"
-    echo -n "."
-    sleep 1
-    echo -n "."
-    sleep 1
-    echo -n "."
-    sleep 1
-    echo -n "."
-    sleep 1
-    echo -n "."
-    sleep 1
-    echo -n "!\n"
+    for ((n=0;n<5;n++))
+    do
+        echo -n "."
+        sleep 1
+    done
+    echo -n "!"
     sleep 1
 
 
     rm -rf sleuth* 2>/dev/null
     # check if brew exists
     if which brew >/dev/null 2>/dev/null ; then
-    echo "[+] Brew Exists"
+    echo -e "\n[+] Brew Exists"
     # continue install
     if brew tap bell-sw/liberica ; then
         if brew install --cask liberica-jdk8-full ; then
@@ -66,8 +61,11 @@ if [[ $1 = "-agree" ]]
             echo 'export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)' | tee >> ~/.bashrc >> ~/.zshrc
             echo "[+] Set JAVA_HOME Variable In bash&zsh configs!"
 
+
             echo "[+] Installing Sleuthkit Dependencies"
+
             brew install ant afflib libewf libpq wget
+
             echo "[+] Sleuthkit Dependencies Installed"
             echo "[+] Creating JDK Symlink"
             rm /usr/local/opt/openjdk
@@ -119,9 +117,6 @@ if [[ $1 = "-agree" ]]
     else
         echo "[!] Error executing 'brew tap bell-sw/liberica'"
     fi
-    
-
-
 
     else
         echo "Installing Brew..."
