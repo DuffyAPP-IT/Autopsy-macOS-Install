@@ -84,7 +84,7 @@ if [[ $1 = "-agree" ]]
                         if sudo make install ; then
                             echo "[+] Installed"
                             echo "[+] Installing Testdisk"
-                            if brew install testdisk ; then
+                            brew install testdisk
                                 echo "[+] Testdisk Installed"
                                 wget https://github.com/sleuthkit/autopsy/releases/download/autopsy-4.17.0/autopsy-4.17.0.zip
                                 unzip autopsy-4.17.0.zip
@@ -92,10 +92,6 @@ if [[ $1 = "-agree" ]]
                                 sh unix_setup.sh
                                 echo "[+] Launching..."
                                 bin/autopsy --jdkhome /usr/local/opt/openjdk
-                            else
-                                echo "[!] Installation Failed"
-                            fi
-
                         else
                             echo "[!] Failed"
                         fi
@@ -109,7 +105,6 @@ if [[ $1 = "-agree" ]]
             else
                 echo "[!] Failed To Download Sleuthkit"
             fi
-
 
         else
             echo "[!] Failed To Install Liberica JDK"
