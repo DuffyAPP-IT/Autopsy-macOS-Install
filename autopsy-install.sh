@@ -52,7 +52,8 @@ if [[ $1 = "-agree" ]]
     # check if brew exists
     if which brew >/dev/null 2>/dev/null ; then
     echo -e "\n[+] Brew Exists"
-    # continue install
+    # continue install - first set dir permissions
+    sudo chown -R $(whoami) /usr/local/share/man/man8
     if brew tap bell-sw/liberica ; then
         if brew install --cask liberica-jdk8-full ; then
             echo "[+] Succesfully Installed Liberica JDK"
